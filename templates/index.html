@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurban Merkezi</title>
+    <link rel="stylesheet" href="static/style.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: url('/static/homebackground.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head> 
+<body>
+    <div class="wrapper">
+        <img src="static/img.png" alt="">
+        <h2 class="text-right">Online Kurban</h2>
+        
+
+        <!-- Login Form -->
+        <div class="form-wrapper login">
+            <form action="/" method="POST">
+                <h2>Giriş Yap</h2>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="mail"></ion-icon>
+                    </span>
+                    <input type="text" name="phone" placeholder="Telefon Numarası" required>
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="lock-closed"></ion-icon>
+                    </span>
+                    <input type="password" name="password" placeholder="Şifre" required>
+                </div>
+                <div class="forgot-pass">
+                    <a href="#">Şifreni mi unuttun?</a>
+                </div>
+                <button type="submit">GİRİŞ YAP</button>
+                <div class="sign-link">
+                    <p>Hesabın mı yok? <a href="#" onclick="registerActive()">Kaydol</a></p>
+                </div>
+
+                <!-- Flash mesajları burada gösterilecek -->
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="popup">
+                            <p>{{ messages[0] }}</p>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </form>
+        </div>
+
+
+            
+
+        <!-- Registration Form -->
+        <div class="form-wrapper register">
+            <form action="/register" method="POST">
+                <h2>Yeni Hesap Oluştur</h2>
+
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="mail"></ion-icon>
+                    </span>
+                    <input type="text" name="register_phone" placeholder="Telefon Numarası" required>
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="lock-closed"></ion-icon>
+                    </span>
+                    <input type="password" name="register_password" placeholder="Şifre" required>
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="lock-closed"></ion-icon>
+                    </span>
+                    <input type="password" name="confirm_password" placeholder="Şifreyi Doğrula" required>
+                </div>
+                <button type="submit">KAYDOL</button>
+                <div class="sign-link">
+                    <p>Hesabın mı var? <a href="#" onclick="loginActive()">Giriş Yap</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+
+
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="static/script.js"></script>
+</body>
+</html>
+
+
+
