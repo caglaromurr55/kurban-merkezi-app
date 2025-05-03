@@ -5,8 +5,6 @@ import os
 app = Flask(__name__)
 app.secret_key = 'gizli_sifre'  # Flash mesajları için bir anahtar belirleyin
 
-port = int(os.environ.get("PORT", 10000))  # Render otomatik PORT değişkeni sağlar
-app.run(host='0.0.0.0', port=port)
 
 user_model = UserModel()
 customer_model = CustomerModel()
@@ -167,4 +165,6 @@ def satisekle2():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
+
