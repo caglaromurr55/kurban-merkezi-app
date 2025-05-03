@@ -1,8 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from models import UserModel, CustomerModel
+import os
 
 app = Flask(__name__)
 app.secret_key = 'gizli_sifre'  # Flash mesajları için bir anahtar belirleyin
+
+port = int(os.environ.get("PORT", 10000))  # Render otomatik PORT değişkeni sağlar
+app.run(host='0.0.0.0', port=port)
 
 user_model = UserModel()
 customer_model = CustomerModel()
@@ -77,6 +81,11 @@ def logout():
 
 @app.route('/yurtici')
 def yurtici():
+
+    if 'user_id' not in session:
+        flash("Bu sayfaya erişebilmek için giriş yapmalısınız.")
+        return redirect(url_for('index'))
+    
     phone = session.get('phone')
     musteriler = customer_model.musteri_getir(phone)
     toplam_yikayit = customer_model.musteri_sayi(phone)
@@ -88,6 +97,11 @@ def yurtici():
 
 @app.route('/yurtdisi')
 def yurtdisi():
+
+    if 'user_id' not in session:
+        flash("Bu sayfaya erişebilmek için giriş yapmalısınız.")
+        return redirect(url_for('index'))
+
     phone = session.get('phone')
     ydmusteriler = customer_model.ydmusteri_getir(phone)    
     toplam_ydkayit = customer_model.ydmusteri_sayi(phone)    
@@ -99,6 +113,11 @@ def yurtdisi():
 
 @app.route('/yurticisatis', methods=['GET', 'POST'])
 def satisekle1():
+
+    if 'user_id' not in session:
+        flash("Bu sayfaya erişebilmek için giriş yapmalısınız.")
+        return redirect(url_for('index'))
+
     if request.method == 'POST':
         name = request.form['name']
         surname = request.form['surname']
@@ -121,6 +140,11 @@ def satisekle1():
 
 @app.route('/yurtdisisatis', methods=['GET', 'POST'])
 def satisekle2():
+
+    if 'user_id' not in session:
+        flash("Bu sayfaya erişebilmek için giriş yapmalısınız.")
+        return redirect(url_for('index'))
+
     if request.method == 'POST':
         name = request.form['name']
         surname = request.form['surname']
